@@ -1,0 +1,64 @@
+<html>
+<head>
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script>
+const API = 'process.php';
+
+jQuery(document).ready(function(){
+    jQuery('form').on('submit', function(e){
+        var jqElm = jQuery(this);
+        jqElm.parents('.section').find('div').html('');
+
+        console.log(removeEmptyParams(jqElm.serialize()));
+        var post = jQuery.post(API, removeEmptyParams(jqElm.serialize()), function(d){
+            console.log(d);
+	    console.log(typeof d);
+            if(typeof d === "object"){
+                jqElm.parents('.section').find('div').html(
+                    JSON.stringify(d, undefined, 2)).addClass('pre');
+            } else {
+                try{
+                    jqElm.parents('.section').find('div').html(
+                        JSON.stringify(JSON.parse(d), undefined, 2)).addClass('pre');
+                } catch(e) {
+                    jqElm.parents('.section').find('div').html(d).removeClass('pre');
+                }
+            }
+        });
+
+        post.fail(function(elm, status, error){
+            jqElm.parents('.section').find('div').html(error).removeClass('pre');
+        });
+
+        e.preventDefault();
+    });
+});
+
+function removeEmptyParams(string){
+    return string.replace(/&{0,1}\w+=(&|$)/g, "$1");
+}
+</script>
+
+</head>
+<body>
+	<div class="section"/>
+    <a name="signin"></a>
+    <h2>Sign in</h2>
+    <form>
+    <input type="hidden" name="action" value="signin"/>
+    Username: <input type="text" name="username"/><br/>
+    Password: <input type="text" name="password"/><br/>
+    <input type="submit" class = "btn btn-primary"/>
+    </form>
+    Server Response:<br/>
+    <div class="server-response"></div>
+</div>
+<h3>No account? Sign up here!</h3>
+<button onclick = "location.href = 'SignUp.html';">Sign up here!</button>
+
+</body>
+</html>
