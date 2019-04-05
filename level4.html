@@ -99,28 +99,30 @@ function removeEmptyParams(string){
 <h3>Put fun picture here</h3> 
 <form> 
 <textarea id="yourcode" cols="40" rows="30">
-def sub(x):
 #write your code here
 
-#finish the return statement
-return 
+
 def test():
-  testInputs = [-3, 1, 87, -7, 7, 12, 507, 16384]
-  testOutputs = [-23, -19, 67, -27,-13, -8, 487, 16364]
+  testInputs = ["Hi", "hello", "Dog", "Cat", "csc", "160"]
+  testOutputs = ["Hihello", "DogCat", "csc160"]
   keepGoing = True
   i = 0
+  j = 0
   count = 0
   while(keepGoing):
-    res = sub(testInputs[i])
-    print ("Input:  " + str(testInputs[i]) +  " Your Result:  " + str(res) + "\n")
-    if(res == testOutputs[i]):
+    res = concatStrings(testInputs[i], testInputs[i+1])
+    print(res)
+    if(res == testOutputs[j]):
       count += 1
-    i += 1
-    if(i == 8):
+    i += 2
+    j += 1
+    if(i == 6):
       keepGoing = False
-test() 
+  print (count)
+
+test()
 </textarea><br /> 
-<p>Challenge: Write code that subtracts 4 from a variable x, 5 times.</p>
+<p>Challenge: Given two strings, create a function called concatStrings, that will return a concatenation of the given two strings.</p>
 <button type="button" onclick="runit()">Run</button> 
 </form> 
 <pre id="output" ></pre> 

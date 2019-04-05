@@ -34,6 +34,14 @@ if($action == "signup"){
     signout();
     
 }
+elseif($action == "passedChallenge"){
+
+}
+
+
+function passedChallenge($dbh, $challengeTitle){
+    
+}
 
 
 function signup($dbh, $username, $password, $displayName){

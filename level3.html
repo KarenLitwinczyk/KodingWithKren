@@ -99,33 +99,28 @@ function removeEmptyParams(string){
 <h3>Put fun picture here</h3> 
 <form> 
 <textarea id="yourcode" cols="40" rows="30">
-def getInput():
-  #write your code here
+def sub(x):
+#write your code here
 
-
-  #finish the return statement
-  return
-
-
+#finish the return statement
+return 
 def test():
-  testInputs = [5, "hello", 'a', -13, "qwerty", 86943, 'L', "zebra"]
-  testOutputs = [5, "hello", 'a', -13, "qwerty", 86943, 'L', "zebra"]
+  testInputs = [-3, 1, 87, -7, 7, 12, 507, 16384]
+  testOutputs = [-23, -19, 67, -27,-13, -8, 487, 16364]
   keepGoing = True
-  count = 0
   i = 0
+  count = 0
   while(keepGoing):
-    res = getInput(testInputs[i])
-    print ("Expected:  " + str(testInputs[i]) +  " Your Result:  " + str(res) + "\n")
-    if(rawInp == testInputs[i]):
+    res = sub(testInputs[i])
+    print ("Input:  " + str(testInputs[i]) +  " Your Result:  " + str(res) + "\n")
+    if(res == testOutputs[i]):
       count += 1
-    i+=1
+    i += 1
     if(i == 8):
       keepGoing = False
-test()
-
-
+test() 
 </textarea><br /> 
-<p>Challenge: Prompt the user for input and save the input value, and return that value.</p>
+<p>Challenge: Write code that subtracts 4 from a variable x, 5 times.</p>
 <button type="button" onclick="runit()">Run</button> 
 </form> 
 <pre id="output" ></pre> 

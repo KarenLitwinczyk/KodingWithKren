@@ -20,13 +20,9 @@
 <script type="text/javascript"> 
 // output functions are configurable.  This one just appends some text
 // to a pre element.
-// var testCase = "def testFunction():\n"
-// testCase = testCase + "  testInputs = [1,1,2,2,3,3]\n" + "  testOutputs = [2,4,6]\n" + "  keepGoing = True\n" + "  i = 0\n" + "  j = 0\n" + "  count = 0\n" + "  while(keepGoing):\n" + "    res = sum(testInputs[i], testInputs[i+1])\n" + "    if(res == testOutputs[j]):\n"
 function outf(text) { 
     var mypre = document.getElementById("output"); 
-    obj = JSON.parse(text);
-    mypre.innerHTML = mypre.innerHTML + obj.Output;
-    checkChallenge(obj.Tests, obj.Passed);
+    mypre.innerHTML = mypre.innerHTML + text; 
 } 
 function builtinRead(x) {
     if (Sk.builtinFiles === undefined || Sk.builtinFiles["files"][x] === undefined)
@@ -59,8 +55,10 @@ function runit() {
    });
 
 
-} 
 
+} 
+</script> 
+<script>
 const API = 'process.php';
 
 jQuery(document).ready(function(){
@@ -96,70 +94,40 @@ jQuery(document).ready(function(){
 function removeEmptyParams(string){
     return string.replace(/&{0,1}\w+=(&|$)/g, "$1");
 }
-//function to check if they have passed all the tests and write to the db.
-function checkChallenge(numTests, numPassed){
-  if(numPassed == numTests){
-    //write to db for challenge name.
-    //send to db that they passed challenge 1 
-  }
-}
 </script>
 
 <h3>Put fun picture here</h3> 
 <form> 
 <textarea id="yourcode" cols="40" rows="30">
-import json
-x = 0
-y = 0 
-def sum(x,y):
-  #write your code here
-  
-  return z
+#redesign later
+#write your code here
 
 
-#ask hank how to hide from user. 
-def testFunction():
-  testInputs = [1,1,2,2,3,3]
-  testOutputs = [2,4,6]
+def test(): 
+  testInputs = [34225, 13689, 529, 1764]
+  testOutputs = [185, 117, 23, 42]
   keepGoing = True
   i = 0
-  j = 0
   count = 0
   while(keepGoing):
-    res = sum(testInputs[i], testInputs[i+1])
-    
-    if(res == testOutputs[j]):
+    res = sub(testInputs[i])
+    if(res == testOutputs[i]):
       count += 1
-    i += 2
-    j +=1
-    if(i == 6):
+    i += 1
+    if(i == 4):
       keepGoing = False
-    if(count == 3):
-      output = "You Passed!"
-    else:
-      output = "Try again"
-    json_map = {}
-    json_map["Tests"] = 3
-    json_map["Passed"] = count
-    json_map["Output"] = output
-    result = json.dumps(json_map)
-  print (result)
 
+</textarea><br /> 
+<p>Challenge: Given the inputs and outputs below, create a function that will satisfy the relationship between the two. 
 
-testFunction()
-</textarea><br/> 
-<p>Challenge: Write code to get the sum of 2 variables, x and y.</p>
+inputs: 
+outputs: </p>
 <button type="button" onclick="runit()">Run</button> 
 </form> 
 <pre id="output" ></pre> 
 <!-- If you want turtle graphics include a canvas -->
 <div id="mycanvas"></div> 
 
-<p id = "p"> hello </p>
-
-<script type="text/javascript">
-document.getElementById("p").innerHTML = testCases;
-</script>
 </body> 
 
 </html> 
