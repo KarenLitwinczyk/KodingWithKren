@@ -2,9 +2,8 @@
 <html>
 <head>
  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+ <link rel="stylesheet" href="https://bootswatch.com/4/minty/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script>
 const API = 'process.php';
@@ -46,24 +45,32 @@ function removeEmptyParams(string){
 
 
 </head>
-<body>
+<header style = 'background-color:#78C2AD; column-count:3;padding:10px;'>
+<h3 style = 'color:white;'>Welcome!</h3>
+<h3 align = "center" style = 'color:white;'> Koding w/ Karen </h3>
+<button class = "btn btn-secondary"style = 'float:right;' onclick = "location.href = 'SignIn.html';">Back</button>
+
+</header>
+<body style = 'background-color:#DAF8DD;' >
 <!-- <div class = "container"> -->
 
-<div class="section"/>
+<div class="section" align = "center" style='margin-top:125px;margin-left:100px;margin-right:100px;'/>
     <a name="signup"></a>
     <h2>Sign up</h2>
     <form>
     <input type="hidden" name="action" value="signup"/>
-    Username: <input type="text" name="username"/><br/>
-    Password: <input type="text" name="password"/><br/>
-    Display Name: <input type="text" name="displayName"/><br/>
+    <input type="text" name="username" placeholder = "Enter Username" size = "20"/><br/>
+	<br/>
+    <input type="text" placeholder = "Enter Password" name="password" size = "20"/><br/>
+	<br/>
+    <input type="text" name="displayName" placeholder = "Enter Display Name"size = "20"/><br/>
     <!-- Handle: <input type="text" name="handle"/><br/> -->
+	<br/>
     <input type="submit" class = "btn btn-primary"/>
     </form>
-    Server Response:<br/>
+    <br/>
     <div class="server-response"></div>
 </div>
 
-<button onclick = "location.href ='SignIn.html';"/>
 </body>
 </html>

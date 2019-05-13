@@ -1,64 +1,94 @@
 <html>
 <head>
  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://bootswatch.com/4/minty/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
 <script>
-const API = 'process.php';
+//const API = 'process.php';
 
-jQuery(document).ready(function(){
-    jQuery('form').on('submit', function(e){
-        var jqElm = jQuery(this);
-        jqElm.parents('.section').find('div').html('');
+//jQuery(document).ready(function(){
+    //jQuery('form').on('submit', function(e){
+       // var jqElm = jQuery(this);
+       // jqElm.parents('.section').find('div').html('');
 
-        console.log(removeEmptyParams(jqElm.serialize()));
-        var post = jQuery.post(API, removeEmptyParams(jqElm.serialize()), function(d){
-            console.log(d);
-	    console.log(typeof d);
-            if(typeof d === "object"){
-                jqElm.parents('.section').find('div').html(
-                    JSON.stringify(d, undefined, 2)).addClass('pre');
-            } else {
-                try{
-                    jqElm.parents('.section').find('div').html(
-                        JSON.stringify(JSON.parse(d), undefined, 2)).addClass('pre');
-                } catch(e) {
-                    jqElm.parents('.section').find('div').html(d).removeClass('pre');
-                }
-            }
-        });
+       // console.log(removeEmptyParams(jqElm.serialize()));
+       // var post = jQuery.post(API, removeEmptyParams(jqElm.serialize()), function(d){
+         //   console.log(d);
+	   // console.log(typeof d);
+          //  if(typeof d === "object"){
+             //   jqElm.parents('.section').find('div').html(
+           //         JSON.stringify(d, undefined, 2)).addClass('pre');
+         //   } else {
+                //try{
+                  //  jqElm.parents('.section').find('div').html(
+                //        JSON.stringify(JSON.parse(d), undefined, 2)).addClass('pre');
+              //  } catch(e) {
+            //        jqElm.parents('.section').find('div').html(d).removeClass('pre');
+          //      }
+        //    }
+      //  });
 
-        post.fail(function(elm, status, error){
-            jqElm.parents('.section').find('div').html(error).removeClass('pre');
-        });
+    //    post.fail(function(elm, status, error){
+  //          jqElm.parents('.section').find('div').html(error).removeClass('pre');
+//        });
 
-        e.preventDefault();
-    });
-});
+    //    e.preventDefault();
+  //  });
+//});
 
-function removeEmptyParams(string){
-    return string.replace(/&{0,1}\w+=(&|$)/g, "$1");
+//function removeEmptyParams(string){
+//    return string.replace(/&{0,1}\w+=(&|$)/g, "$1");
+
+function signIn(){
+	var userName = document.getElementById("username").value;
+	var password = document.getElementById("password").value;
+	$.ajax({
+		url: "process.php",
+		type: 'POST',
+		data: {'action': 'signin', 'username': userName, 'password': password},
+		success: function(response){
+			console.log(response.Message);
+			console.log(response.Page);
+			if(response.Message != "Invalid Username or Password"){
+				window.location.replace(response.Page);
+			
+			}
+			else{
+				document.getElementById("server-response").innerHTML = response.Message;
+			}
+		}
+	
+	
+	});
+
+
 }
+
 </script>
 
 </head>
-<body>
-	<div class="section"/>
+<header style = 'background-color:#78C2AD; column-count:1;padding:10px;'>
+<h3 align = "center" style = 'color:white;'> Koding w/ Karen </h3>
+
+</header>
+<body style = 'background-color:#DAF8DD;' >
+<div class="section" align = "center" style='margin-top:125px;margin-left:100px;margin-right:100px;'/>
     <a name="signin"></a>
     <h2>Sign in</h2>
-    <form>
-    <input type="hidden" name="action" value="signin"/>
-    Username: <input type="text" name="username"/><br/>
-    Password: <input type="text" name="password"/><br/>
-    <input type="submit" class = "btn btn-primary"/>
-    </form>
-    Server Response:<br/>
-    <div class="server-response"></div>
+    <input type="text" id="username" placeholder = "Enter Username"size = "20"/><br/>
+	<br/>
+    <input type="text" id="password" placeholder = "Enter Password" size = "20"/><br/>
+	<br/>
+    <button class = "btn btn-primary" style = 'margin-top: 10px;' onclick = "signIn()">Submit</button>
+    <p id = "server-response"></p>
 </div>
-<h3>No account? Sign up here!</h3>
-<button onclick = "location.href = 'SignUp.html';">Sign up here!</button>
+<br/>
+<div align = "center">
+<h3 style = 'margin-top:15px;'>No account? Sign up here!</h3>
+<button id = "b1" onclick = "location.href = 'SignUp.html';" class = "btn btn-primary">Sign up here!</button>
 
+</div>
 </body>
 </html>
